@@ -1,27 +1,39 @@
 window.addEventListener("load", () => {
   getData();
 });
-
+let countries
 const getData = async () => {
-  const URL = "https://restcountries.com/v3.1/all";
-  const res = await fetch(URL);
   try {
+    const URL = "https://restcountries.com/v3.1/all";
+    const res = await fetch(URL);
     if (!res.ok) {
       throw new Error("hatasız kul olmaz 😅");
     }
     const data = await res.json();
+    countries = data
     // console.log(data);
     getName(data);
   } catch (err) {
     console.log(err);
+    cardSection.innerHTML = `
+    <img src="${png}" class="card-img-top" alt="..." />`;
   }
 };
-
+const select = document.querySelector(".form-select");
+select.addEventListener("change", (e)=>{
+  const selected = e.currentTarget.value
+  if(selected){
+    const selectedCountry = countries.filter((c)=>{
+      return c.name.common == selected
+    })
+    console.log(selectedCountry)
+  }
+})
 const getName = (arr) => {
+  
   arr.map((item) => {
     // const cName = item.name.common
     // console.log(cName)
-    const select = document.querySelector(".form-select");
     select.innerHTML += `
     <option value="1">${item.name.common}</option>
     `;
@@ -30,8 +42,8 @@ const getName = (arr) => {
 
 const writeDOM = (w) => {
   const {
-    flags: { png },
-    name: { common },
+    flags: {png},
+    name: {common},
     region,
     capital,
     languages,
