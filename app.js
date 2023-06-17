@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
   getData();
 });
-let countries
+let countries;
 const getData = async () => {
   try {
     const URL = "https://restcountries.com/v3.1/all";
@@ -10,7 +10,7 @@ const getData = async () => {
       throw new Error("hatasız kul olmaz 😅");
     }
     const data = await res.json();
-    countries = data
+    countries = data;
     // console.log(data);
     getName(data);
   } catch (err) {
@@ -20,17 +20,16 @@ const getData = async () => {
   }
 };
 const select = document.querySelector(".form-select");
-select.addEventListener("change", (e)=>{
-  const selected = e.currentTarget.value
-  if(selected){
-    const selectedCountry = countries.filter((c)=>{
-      return c.name.common == selected
-    })
-    console.log(selectedCountry)
+select.addEventListener("change", (e) => {
+  const selected = e.currentTarget.value;
+  if (selected) {
+    const selectedCountry = countries.filter((c) => {
+      return c.name.common == selected;
+    });
+    console.log(selectedCountry);
   }
-})
+});
 const getName = (arr) => {
-  
   arr.map((item) => {
     // const cName = item.name.common
     // console.log(cName)
@@ -42,8 +41,8 @@ const getName = (arr) => {
 
 const writeDOM = (w) => {
   const {
-    flags: {png},
-    name: {common},
+    flags: { png },
+    name: { common },
     region,
     capital,
     languages,
@@ -70,11 +69,13 @@ const writeDOM = (w) => {
     </li>
     <li class="list-group-item">
       <i class="fas fa-lg fa-comments"></i>
-      <span class="fw-bold"> Languages:</span> ${languages}
+      <span class="fw-bold"> Languages:</span>${Object.values(languages)}
     </li>
     <li class="list-group-item">
       <i class="fas fa-lg fa-money-bill-wave"></i>
-      <span class="fw-bold"> Currencies:</span> ${currencies}
+      <span class="fw-bold"> Currencies:</span> 
+      ${Object.values(currencies)[0].name}, 
+      ${Object.values(currencies)[0].symbol}
     </li>
     <li class="list-group-item">
     <i class="fa-solid fa-people-group"></i></i>
@@ -92,5 +93,5 @@ const writeDOM = (w) => {
       </div>
   
   
-  `
+  `;
 };
