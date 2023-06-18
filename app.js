@@ -1,7 +1,5 @@
-window.addEventListener("load", () => {
-  getData();
-});
 let countries;
+
 const getData = async () => {
   try {
     const URL = "https://restcountries.com/v3.1/all";
@@ -11,34 +9,36 @@ const getData = async () => {
     }
     const data = await res.json();
     countries = data;
-    // console.log(data);
     getName(data);
   } catch (err) {
     console.log(err);
-    cardSection.innerHTML = `
-    <img src="${png}" class="card-img-top" alt="..." />`;
+    // cardSection.innerHTML = `
+    // <img src="./img/404.png" class="card-img-top" alt="..." />`;
   }
 };
 const select = document.querySelector(".form-select");
+  // console.log(select);
+
 select.addEventListener("change", (e) => {
   const selected = e.currentTarget.value;
+  console.log(selected);
   if (selected) {
     const selectedCountry = countries.filter((c) => {
-      return c.name.common == selected;
+      return c.name.common === selected;
     });
     console.log(selectedCountry);
+    writeDOM(selectedCountry);
   }
 });
 const getName = (arr) => {
   arr.map((item) => {
-    // const cName = item.name.common
-    // console.log(cName)
+    const cName = item.name.common;
+    // console.log(cName);
     select.innerHTML += `
-    <option value="1">${item.name.common}</option>
+    <option value=${cName}>${cName}</option>
     `;
   });
 };
-
 const writeDOM = (w) => {
   const {
     flags: { png },
@@ -90,8 +90,9 @@ const writeDOM = (w) => {
     <i class="fa-solid fa-map-location-dot"></i><span class="fw-bold"> Map:</span> <a href= ${googleMaps}
        target='_blank'> Go to google map</a> </li>
   </ul>
-      </div>
-  
-  
-  `;
+      </div>`;
 };
+
+window.addEventListener("load", () => {
+  getData();
+});
