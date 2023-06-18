@@ -9,3 +9,9 @@ body{
     background-size: cover;
     height: 100vh;
 }
+h1{
+    margin: 4rem 15rem;
+    padding: 1rem;
+    border-radius: 25px;
+    background-color: tomato;
+}
