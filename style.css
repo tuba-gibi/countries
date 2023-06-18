@@ -7,7 +7,7 @@ body{
     background-image: url(https://cdn.evrimagaci.org/quzas3MKegpX_l749fJBbgig9nY=/evrimagaci.org%2Fpublic%2Fcontent_media%2Ff7c012314ee9c1cc6b4c3606aabc6412.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    /* height: 100vh; */
 }
 h1{
     margin: 4rem 15rem;
