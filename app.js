@@ -27,7 +27,11 @@ select.addEventListener("change", (e) => {
       return c.name.common === selected;
     });
     console.log(selectedCountry);
-    writeDOM(selectedCountry);
+    if (selectedCountry.length > 0) {
+      writeDOM(selectedCountry);
+    } else {
+      console.log("Selected country not found");
+    }
   }
 });
 const getName = (arr) => {
@@ -50,7 +54,7 @@ const writeDOM = (w) => {
     population,
     borders,
     maps: { googleMaps },
-  } = w;
+  } = w[0];
 
   const cardSection = document.getElementById("card");
   cardSection.innerHTML = `
